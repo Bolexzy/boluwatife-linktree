@@ -8,7 +8,7 @@ export default function Home() {
       <div>
         <Profile />
       </div>
-      <div className=" my-12 lg:my-0">
+      <div className=" my-12 lg:my-0 lg:mt-8">
         <Links />
       </div>
       <div className="w-full mt-8">

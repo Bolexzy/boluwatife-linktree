@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 
 const displayVariants = {
@@ -11,6 +11,7 @@ const displayVariants = {
   animate: {
     display: "flex",
     opacity: 1,
+    scale: 1.08,
     transition: {
       delay: 0.3,
       duration: 1,
@@ -21,6 +22,20 @@ const displayVariants = {
 
 const Links = () => {
   const [show, setShow] = React.useState(false);
+  const [isActive, setIsActive] = React.useState(0);
+  const timeoutRef = useRef(null);
+
+  const handleGroupActive = (id) => {
+    // Clear the current timeout if there is one
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setIsActive(id);
+    timeoutRef.current = setTimeout(() => {
+      setIsActive(0);
+    }, 8000); // revert back to initial state after 2 seconds
+  };
 
   const links = [
     {
@@ -31,7 +46,7 @@ const Links = () => {
       summary: "I have a lot of projects on my github :)",
     },
     {
-      id: 1,
+      id: 2,
       name: "LinkedIn",
       url: "www.linkedin.com/in/boluwatifeo",
       icon: "/images/linkedin.svg",
@@ -39,14 +54,14 @@ const Links = () => {
         "Connect with me on LinkedIn, where I engage with the professional community and share insights about my work.",
     },
     {
-      id: 1,
+      id: 3,
       name: "Twitter",
       url: "https://twitter.com/Bolexzyy__",
       icon: "/images/twitter.svg",
       summary: "Tweeting my way through the code jungle!",
     },
     {
-      id: 1,
+      id: 4,
       name: "SimpleFolio",
       url: "https://simplefolio-nine.vercel.app/",
       icon: "/images/website.svg",
@@ -68,6 +83,7 @@ const Links = () => {
         console.log("something went wrong");
       });
   };
+
   return (
     <div className="w-full flex flex-col items-center justify-center gap-5">
       <div className={`toast toast-top toast-end ${show ? "flex" : "hidden"}`}>
@@ -77,7 +93,7 @@ const Links = () => {
       </div>
       {links.map((link) => (
         <motion.div
-          className="w-[350px] md:w-[450px] lg:w-[550px] p-2 rounded-xl bg-gray-400"
+          className="w-[350px] md:w-[450px] lg:w-[550px] p-2 rounded-xl bg-gray-400 group border-white active:border-2 hover:border-2"
           initial={{
             opacity: 0,
             y: 100,
@@ -94,12 +110,12 @@ const Links = () => {
             },
           }}
           whileHover="animate"
-          whileTap="animate"
+          onTap={() => handleGroupActive(link.id)}
           key={link.id}
         >
           <div className="flex items-center justify-between  text-primary-content focus:bg-slate-300">
             {/* icon */}
-            <a href={link.url} target="_blank" className="w-8">
+            <div className="w-8">
               <Image
                 width={50}
                 height={50}
@@ -107,9 +123,15 @@ const Links = () => {
                 src={link.icon}
                 className="w-full h-full"
               />
-            </a>
+            </div>
 
-            <p className="text-lg text-black/75 font-medium">{link.name}</p>
+            <a
+              href={link.url}
+              target="_blank"
+              className="underline underline-offset-2 decoration-slate-500"
+            >
+              <p className="text-lg text-black/75 font-medium">{link.name}</p>
+            </a>
             {/* copy svg icon */}
             <button
               className="btn btn-sm bg-transparent border-none  text-white hover:bg-transparent"
@@ -132,10 +154,14 @@ const Links = () => {
             </button>
           </div>
           <motion.div
-            className="w-full opacity-0 hidden items-center justify-center mt-4 text-center text-primary-content"
+            className={`w-full  ${
+              isActive === link.id
+                ? "flex opacity-1 scale-105"
+                : "hidden opacity-0"
+            }  transition-all ease-in-out items-center justify-center mt-4 text-center text-primary-content`}
             variants={displayVariants}
           >
-            <p className="text-gray-600">{link.summary}</p>
+            <p className="text-gray-600 text-xs">{link.summary}</p>
           </motion.div>
         </motion.div>
       ))}
