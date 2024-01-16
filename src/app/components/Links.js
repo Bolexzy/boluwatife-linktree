@@ -94,6 +94,7 @@ const Links = () => {
             },
           }}
           whileHover="animate"
+          whileTap="animate"
           key={link.id}
         >
           <div className="flex items-center justify-between  text-primary-content focus:bg-slate-300">
