@@ -28,6 +28,8 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "light-gradient":
+          "linear-gradient(106deg, #C5C7C9 22.29%, #9ABDC7 48.81%, #EEEFF4 120.48%)",
       },
     },
   },

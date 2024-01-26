@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Profile from "./components/Profile";
 import Links from "./components/Links";
+import BlogLink from "./components/BlogLink";
 
 export default function Home() {
   return (
@@ -10,6 +11,9 @@ export default function Home() {
       </div>
       <div className=" my-12 lg:my-0 lg:mt-8">
         <Links />
+      </div>
+      <div className=" my-5 lg:my-0 lg:mt-8">
+        <BlogLink />
       </div>
       <div className="w-full mt-8">
         <p className="text-xs text-center">

@@ -62,6 +62,14 @@ const Links = () => {
     },
     {
       id: 4,
+      name: "Blog",
+      url: "https://bolexzy.hashnode.dev/",
+      icon: "/images/hashnode.svg",
+      summary:
+        "Sharing my learning experiences and valuable personal development resources",
+    },
+    {
+      id: 5,
       name: "SimpleFolio",
       url: "https://simplefolio-nine.vercel.app/",
       icon: "/images/website.svg",
@@ -93,7 +101,7 @@ const Links = () => {
       </div>
       {links.map((link) => (
         <motion.div
-          className="w-[350px] md:w-[450px] lg:w-[550px] p-2 rounded-xl bg-gray-400 group border-white active:border-2 hover:border-2"
+          className="w-[350px] md:w-[450px] lg:w-[550px] rounded-xl bg-light-gradient group border-white active:border-2 hover:border-2"
           initial={{
             opacity: 0,
             y: 100,
@@ -115,26 +123,26 @@ const Links = () => {
         >
           <div className="flex items-center justify-between  text-primary-content focus:bg-slate-300">
             {/* icon */}
-            <div className="w-8">
+            <div className="w-10 pl-[3px]">
               <Image
                 width={50}
                 height={50}
                 alt="link image"
                 src={link.icon}
-                className="w-full h-full"
+                className="w-full h-auto"
               />
             </div>
 
             <a
               href={link.url}
               target="_blank"
-              className="underline underline-offset-2 decoration-slate-500"
+              className="underline underline-offset-2 decoration-slate-500 p-2"
             >
-              <p className="text-lg text-black/75 font-medium">{link.name}</p>
+              <p className="text-lg text-black font-medium ">{link.name}</p>
             </a>
             {/* copy svg icon */}
             <button
-              className="btn btn-sm bg-transparent border-none  text-white hover:bg-transparent"
+              className="btn btn-sm bg-transparent border-none  text-white hover:bg-transparent px-2"
               onClick={(e) => handleClick(e, link.url)}
             >
               <svg
@@ -161,7 +169,7 @@ const Links = () => {
             }  transition-all ease-in-out items-center justify-center mt-4 text-center text-primary-content`}
             variants={displayVariants}
           >
-            <p className="text-gray-600 text-xs">{link.summary}</p>
+            <p className="text-gray-600 text-xs p-2">{link.summary}</p>
           </motion.div>
         </motion.div>
       ))}
